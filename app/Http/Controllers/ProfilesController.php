@@ -10,9 +10,9 @@ use App\Models\Profile;
 
 class ProfilesController extends Controller
 {
-    public function index($id)
+    public function index($ids)
     {
-    	$user = User::findOrFail($id);
+    	$user = User::findOrFail($ids);
 
     	return view('profiles.index', compact("user"));
     }
