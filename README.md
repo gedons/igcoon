@@ -1,2 +1,2 @@
 # buyer
-An Advance Ecommerce project with the PHP Laravel Framework.
+An Instagram Web Application Clone Using The PHP Laravel Framework
