@@ -40,7 +40,7 @@ class PostsController extends Controller
     			'image' => $imagepath,
     		]);
 
-    		return Redirect('/profile/'.auth()->user()->id)->with('message', 'Caption Created Successfully!!!');
+    		return Redirect('/profile/'.auth()->user()->id)->with('message', ' New Caption Created Successfully!!!');
     	
     }
 }
