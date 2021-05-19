@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Session;
+use Image;
 
 class PostsController extends Controller
 {
@@ -33,6 +34,10 @@ class PostsController extends Controller
 
     	   //imagepath
     		$imagepath = $data['image']->store('uploads', 'public');
+
+            //resize image
+            $image = Image::make(public_path("storage/{$imagepath}"))->fit(1200, 1200);
+            $image->save();
     		
     		
     		auth()->user()->posts()->create([
@@ -42,5 +47,12 @@ class PostsController extends Controller
 
     		return Redirect('/profile/'.auth()->user()->id)->with('message', 'Caption Created Successfully!!!');
     	
+    }
+
+    public function show($id)
+    {
+        $post = Post::findorFail($id);
+    
+        return view("posts.show",compact("post"));
     }
 }

@@ -33,6 +33,18 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+//even triger when then profile.show route is run
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user){
+            $user->profiles()->create([
+                'title' => $user->username,
+            ]);
+        });
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
