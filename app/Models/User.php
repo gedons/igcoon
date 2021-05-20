@@ -33,7 +33,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-//even triger when then profile.show route is run
+//event triger when then profile.show route is run
     protected static function boot()
     {
         parent::boot();

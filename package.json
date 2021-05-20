@@ -1,5 +1,5 @@
 {
-	 "private": true,
+    "private": true,
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -9,7 +9,14 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
-  "dependencies": {
-    "cross-env": "^7.0.3"
-  }
+    "dependencies": {
+        "cross-env": "^7.0.3"
+    },
+    "devDependencies": {
+        "bootstrap": "^4.6.0",
+        "jquery": "^3.6",
+        "popper.js": "^1.16.1",
+        "sass": "^1.32.11",
+        "sass-loader": "^11.0.1"
+    }
 }
