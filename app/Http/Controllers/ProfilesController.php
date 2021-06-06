@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profile;
 use Image;
+use Cache;
 
 
 class ProfilesController extends Controller
@@ -16,7 +17,35 @@ class ProfilesController extends Controller
     {
     	$user = User::findOrFail($id);
 
-    	return view('profiles.index', compact("user"));
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+
+        //use cache
+        $postCount = Cache::remember(
+            'count.posts.' . $user->id,
+             now()->addSeconds(30),
+              function () use ($user) {
+                 return $user->posts->count();
+            });
+
+
+        $followersCount = Cache::remember(
+            'count.followers.' . $user->id,
+             now()->addSeconds(30),
+              function () use ($user) {
+                 return $user->profiles->followers->count();
+            });
+
+
+
+        $followingCount = Cache::remember(
+            'count.following.' . $user->id,
+             now()->addSeconds(30),
+              function () use ($user) {
+                 return  $user->following->count();
+            });
+
+
+    	return view('profiles.index', compact("user","follows", "postCount", "followersCount", "followingCount"));
     }
 
     public function edit($id)

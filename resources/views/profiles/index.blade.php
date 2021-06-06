@@ -13,7 +13,7 @@
 
                 <div class="d-flex align-items-center pb-3">
                     <div class="h4">{{$user->username }}</div>  
-                    <button class="btn btn-primary ml-4">Follow</button>
+                    <follow-button user-id="{{$user->id}}" follows="{{$follows}}"></follow-button>
                 </div>
 
                 @can('update',$user->profiles) 
@@ -25,9 +25,9 @@
                 <a href="{{route('profile.edit',$user->id)}}">Edit Profile</a>
             @endcan
                 <div class="d-flex">
-                <div class="pr-5"><strong>{{$user->posts->count()}}</strong> posts</div>
-                <div class="pr-5"><strong>300k</strong> followers</div>
-                <div class="pr-5"><strong>40k</strong> following</div>
+                <div class="pr-5"><strong>{{$postCount}}</strong> posts</div>
+                <div class="pr-5"><strong>{{$followersCount}}</strong> followers</div>
+                <div class="pr-5"><strong>{{$followingCount}}</strong> following</div>
             </div>
             <div class="pt-4 font-weight-bold">{{$user->profiles->title}}</div>
             <div>{{$user->profiles->description}}</div>
@@ -41,8 +41,7 @@
 
             <a href="{{route('post.show',$post->id)}}">
                <img src="/storage/{{$post->image}}" class="w-100"> 
-            </a>
-                
+            </a> 
         </div>
        @endforeach
     </div>  

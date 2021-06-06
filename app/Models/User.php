@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Mail;
 
 class User extends Authenticatable
 {
@@ -33,7 +34,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-//event triger when then profile.show route is run
+//event triger to create a profile when a new user is registered
     protected static function boot()
     {
         parent::boot();
@@ -42,6 +43,9 @@ class User extends Authenticatable
             $user->profiles()->create([
                 'title' => $user->username,
             ]);
+
+            // send a welcome mail when a new user is registered
+            Mail::to($user->email)->send(new NewUserWelcomeEmail());
         });
     }
 
@@ -54,9 +58,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-     public function profiles()
+    public function profiles()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    //many to many relation with the profiles
+    public function following()
+    {
+        return $this->belongsToMany(Profile::class);
     }
 
     public function posts()

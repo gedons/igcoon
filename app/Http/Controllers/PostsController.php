@@ -14,6 +14,17 @@ class PostsController extends Controller
 		$this->middleware('auth');
 	}
 
+    public function index()
+    {
+        //get all the users we are following
+        $user = auth()->user()->following->pluck('user_id');
+
+        //get the posts of all the user we are following
+        $posts  = Post::whereIn('user_id', $user)->with('user')->latest()->get();
+       
+        return view('posts.index', compact('posts'));
+    }
+
     public function create()
     {
     	return view('posts.create');
@@ -26,7 +37,7 @@ class PostsController extends Controller
 
     		//  validation
 				$rules = [					
-					'caption' => 'required|regex:/^[\pL\s\-]+$/u|max:100',	
+					'caption' => 'required|max:100',	
 					'image' => 'required|image',				
 				];
 				
