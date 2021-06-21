@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    @if($user->profiles->status == 1)
     <form action="{{route('profile.update',$user->id)}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
@@ -61,5 +62,8 @@
 
        </div>
    </div>
+     @else
+    <p>Account Deactivated</p>
+    @endif
 </div>
 @endsection

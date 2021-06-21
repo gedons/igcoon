@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profile;
+use App\Notifications\UserCreatePost;
+use Notification;
 use Image;
 use Cache;
 
@@ -93,7 +95,7 @@ class ProfilesController extends Controller
 	        	
 	        ));
 
-
+        Notification::send(auth()->user(), new UserCreatePost($data['title']));
     	return Redirect("/profile/{$user->id}")->with("message", "Profile Updated Successfully!!!");
 				
     }

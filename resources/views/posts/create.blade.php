@@ -22,6 +22,17 @@
                         </span>
                     @enderror
             </div>
+             <div class="row">
+                <label for="description" class="col-md-4 col-form-label">Post Description</label>
+
+                    <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror" autocomplete="description" autofocus></textarea>
+
+                    @error('description')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+            </div>
 
             <div class="row">
                <label for="image" class="col-md-4 col-form-label">Post Image</label>

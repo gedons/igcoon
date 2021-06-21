@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Mail\NewUserWelcomeEmail;
 use Mail;
 
 class User extends Authenticatable
@@ -42,10 +43,14 @@ class User extends Authenticatable
         static::created(function ($user){
             $user->profiles()->create([
                 'title' => $user->username,
-            ]);
+                'status'=> 1,
+                'verifybadge' => 0,
+            ]); 
+
+
 
             // send a welcome mail when a new user is registered
-            Mail::to($user->email)->send(new NewUserWelcomeEmail());
+           // Mail::to($user->email)->send(new NewUserWelcomeEmail());
         });
     }
 
@@ -68,6 +73,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Profile::class);
     }
+
+    //many to many relation with the post
+    public function liked()
+    {
+        return $this->belongsToMany(Post::class);
+    }
+    
 
     public function posts()
     {

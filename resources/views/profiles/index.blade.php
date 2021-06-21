@@ -2,9 +2,14 @@
 
 @section('content')
 <div class="container">
+    @if($user->profiles->status == 1)
     <div class="row">
         <div class="col-3 p-5">
+             @if ($user->profiles->image)
             <img src="/storage/{{$user->profiles->image}}" width="100px" class="rounded-circle">
+             @else
+             <img src="{{ asset('images/img.png')}}" width="100px" class="rounded-circle">
+             @endif
         </div>
         
         <div class="col-9 pt-5">
@@ -12,7 +17,14 @@
             <div class="d-flex justify-content-between align-items-baseline">
 
                 <div class="d-flex align-items-center pb-3">
-                    <div class="h4">{{$user->username }}</div>  
+                    <div class="h4">
+                         @if($user->profiles->verifybadge == 1)
+                            {{$user->username }} <p>verified</p>
+                         @else
+                            {{$user->username }} <p>unverified</p>
+                         @endif
+                        <!--  {{$user->username }} -->
+                    </div>  
                     <follow-button user-id="{{$user->id}}" follows="{{$follows}}"></follow-button>
                 </div>
 
@@ -45,5 +57,8 @@
         </div>
        @endforeach
     </div>  
+    @else
+    <p>Account Deactivated</p>
+    @endif
 </div>
 @endsection

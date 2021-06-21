@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <div class="pl-3">igCloon</div>
+                    <div class="pl-3"><img style="width: 65px;" src="{{url('images/2.png')}}"></div>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -52,12 +52,37 @@
                                 </li>
                             @endif
                         @else
+                                @if (Auth::user()->profiles->image)
+                                <div class="image pt-1"> 
+                                <a href="{{ route('profile.show', Auth::id()) }}">
+                                    <img src="/storage/{{Auth::user()->profiles->image}}" width="30px" alt="img" class="rounded-circle" />
+                                </a>
+                                </div>
+                                @else
+                                <a href="{{ route('profile.show', Auth::id()) }}">
+                                <div class="image pt-1">
+                                    <img src="{{ asset('images/img.png')}}" alt="img" width="30px" class="rounded-circle"/>
+                                </div>
+                                </a>
+                                @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->username }}
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                   {{--  <span>{{count(Auth::user()->unreadNotifications) }}</span> --}}
+                               
+                                
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                @forelse(Auth::user()->unreadNotifications as $notification)
+                                    <a href="#" class="dropdown-item">
+                                       Post <b>{{$notification->data['caption']}}</b> Created Successfully 
+                                    <p class="text-xs text-secondary mb-0">
+                                        {{$notification->created_at->diffForHumans()}}
+                                    </p>
+                                    </a>
+                                    @empty
+                                     <p class="dropdown-item">No Notifications Found</p>
+                                @endforelse
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -68,6 +93,7 @@
                                         @csrf
                                     </form>
                                 </div>
+
                             </li>
                         @endguest
                     </ul>
