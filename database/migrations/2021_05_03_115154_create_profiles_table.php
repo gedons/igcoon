@@ -19,6 +19,9 @@ class CreateProfilesTable extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('url')->nullable();
+            $table->string('image')->nullable();
+            $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('verifybadge')->nullable();
             $table->timestamps();
 
             $table->index('user_id');

@@ -8,8 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+	protected $guarded = [];
+	
     public function user()
     {
     	return $this->belongsTo(User::class);
+    }
+
+     //many to many relation with the profiles
+    public function followers()
+    {
+        return $this->belongsToMany(User::class);
     }
 }
