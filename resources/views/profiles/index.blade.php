@@ -43,7 +43,7 @@
             </div>
             <div class="pt-4 font-weight-bold">{{$user->profiles->title}}</div>
             <div>{{$user->profiles->description}}</div>
-            <div><a href="#">{{$user->profiles->url}}</a></div>
+            <div><a href="{{$user->profiles->url}}">{{$user->profiles->url}}</a></div>
         </div>
     </div>
 
@@ -54,9 +54,16 @@
             <a href="{{route('post.show',$post->id)}}">
                <img src="/storage/{{$post->image}}" class="w-100"> 
             </a> 
+             <div class="d-flex pt-1">
+                    <a href="{{ route('post.edit',$post->id) }}" class="btn btn-primary">Edit</a>
+                     <form action="{{ route('post.delete', $post->id) }}" method="post">
+                        @csrf
+                        <div class="pl-2"><button type="submit" class="btn btn-light">Delete</button></div>
+                    </form>
+             </div>
         </div>
        @endforeach
-    </div>  
+    </div>
     @else
     <p>Account Deactivated</p>
     @endif

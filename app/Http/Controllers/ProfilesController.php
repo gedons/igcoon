@@ -95,7 +95,7 @@ class ProfilesController extends Controller
 	        	
 	        ));
 
-        Notification::send(auth()->user(), new UserCreatePost($data['title']));
+       // Notification::send(auth()->user(), new UserCreatePost($data['title']));
     	return Redirect("/profile/{$user->id}")->with("message", "Profile Updated Successfully!!!");
 				
     }

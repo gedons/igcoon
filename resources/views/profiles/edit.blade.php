@@ -5,7 +5,7 @@
     @if($user->profiles->status == 1)
     <form action="{{route('profile.update',$user->id)}}" method="post" enctype="multipart/form-data">
     @csrf
-    @method('PATCH')
+    @method('patch')
        <div class="row">
        <div class="col-8 offset-2">
 

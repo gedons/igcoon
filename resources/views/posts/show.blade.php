@@ -48,11 +48,18 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+
+                    <input id="name" type="hidden" name="name" class="form-control @error('name') is-invalid @enderror" autocomplete="name" value="{{auth()->user()->username}}" autofocus>
+
+
                <button class="btn btn-primary mt-2">Comment</button>
          </div>
    </form>
    <div>
-     <p>{{auth()->user()->username}} : {{$post->comments->email}}</p>
+    @foreach ($post->comments as $comment)
+       <p><b>{{$comment->name}}</b> : {{$comment->comment}}</p>
+    @endforeach
+    
    </div>
    </div>
 </div>

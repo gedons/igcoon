@@ -11,6 +11,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/front_script.js') }}"></script>
+    
+    {{-- sweet alert --}}
+    <script src="{{ asset('js/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2/sweetalert2.all.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +23,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- sweetalert -->
+  <link rel="stylesheet" href="{{ asset('css/sweetalert2/sweetalert2.min.css') }}">
+
 </head>
 <body>
     <div id="app">

@@ -20,6 +20,7 @@ class CommentsController extends Controller
 
         $comment = new Comment();
         $comment->comment = $data['comment'];
+        $comment->name = $data['name'];
         $comment->post()->associate($post);
 
         $comment->save();

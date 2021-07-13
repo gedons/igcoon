@@ -63,6 +63,9 @@ Route::patch('/profile/{id}', [ProfilesController::class, 'update'])->name('prof
 Route::get('/post/create', [PostsController::class, 'create'])->name('post.create');
 Route::post('/post', [PostsController::class, 'store'])->name('post.store');
 Route::get('/post/{id}', [PostsController::class, 'show'])->name('post.show');
+Route::get('/post/edit/{id}', [PostsController::class, 'edit'])->name('post.edit');
+Route::patch('/post/update/{id}', [PostsController::class, 'update'])->name('post.update');
+Route::post('/delete-post/{id}', [PostsController::class, 'delete'])->name('post.delete');
 
 //comment route
 Route::post('/post/comment/{id}', [CommentsController::class, 'create'])->name('comment.create');

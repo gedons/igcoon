@@ -16,9 +16,9 @@ class UserCreatePost extends Notification
      *
      * @return void
      */
-    public function __construct($caption)
+    public function __construct($title)
     {
-        $this->caption = $caption;
+        $this->title = $title;
     }
 
     /**
@@ -55,7 +55,7 @@ class UserCreatePost extends Notification
     public function toArray($notifiable)
     {
         return [
-            'caption' => $this->$caption
+            'caption' => $this->$title
         ];
     }
 }
